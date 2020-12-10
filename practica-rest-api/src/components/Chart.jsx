@@ -61,13 +61,12 @@ const Y = [
 // 	{ name: "3", value: 300 },
 //     { name: "4", value: 400 },
 // ];
-const data = X.map((x, index) => {
-	return { costo: Y[index], iteraciones: x };
-});
 
-export default function Chart() {
+export default function Chart({ costos, iteraciones }) {
 	const theme = useTheme();
-
+	const data = iteraciones.map((x, index) => {
+		return { costo: costos[index], iteraciones: x };
+	});
 	return (
 		<React.Fragment>
 			<LineChart
@@ -81,10 +80,10 @@ export default function Chart() {
 					left: 24,
 				}}
 			>
-				<XAxis dataKey='iteraciones' stroke={theme.palette.text.secondary}>
+				<XAxis dataKey="iteraciones" stroke={theme.palette.text.secondary}>
 					<Label
 						angle={0}
-						position='bottom'
+						position="bottom"
 						style={{
 							textAnchor: "middle",
 							fill: theme.palette.text.primary,
@@ -96,14 +95,17 @@ export default function Chart() {
 				<YAxis stroke={theme.palette.text.secondary}>
 					<Label
 						angle={270}
-						position='left'
-						style={{ textAnchor: "middle", fill: theme.palette.text.primary }}
+						position="left"
+						style={{
+							textAnchor: "middle",
+							fill: theme.palette.text.primary,
+						}}
 					>
 						Costo
 					</Label>
 				</YAxis>
-				<Line type='monotone' dataKey='costo' stroke='#8884d8' />
-				<CartesianGrid stroke='#ccc' strokeDasharray='5 5' />
+				<Line type="monotone" dataKey="costo" stroke="#8884d8" />
+				<CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
 				<Tooltip />
 			</LineChart>
 		</React.Fragment>

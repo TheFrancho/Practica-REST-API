@@ -14,15 +14,7 @@ function Seleccion() {
 	const history = useHistory();
 
 	const enviar = (e) => {
-		axios
-			.get(`http://localhost:5000/${e.target.name}`, {})
-			.then((res) => {
-				console.log(res.data);
-				history.push(`/grafica/${e.target.name}`);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+		history.push(`/grafica/${e.target.name}`);
 		//history.push(`/${e.target.name}`);
 		console.log(e.target.name);
 	};
@@ -32,23 +24,25 @@ function Seleccion() {
 	useEffect(() => {}, []);
 	return (
 		<div className={brucss.principal}>
-			<AppBar position='static'>
+			<AppBar position="static">
 				<Toolbar>
-					<Typography variant='h6'>Práctica REST-API - Red Neuronal</Typography>
+					<Typography variant="h6">
+						Práctica REST-API - Red Neuronal
+					</Typography>
 				</Toolbar>
 			</AppBar>
 			<Grid className={brucss.grupoBotones}>
 				<ButtonBase className={brucss.image} onClick={enviar}>
-					<img className={brucss.img} alt='Or' src={or} name='OR' />
+					<img className={brucss.img} alt="Or" src={or} name="OR" />
 				</ButtonBase>
 				<ButtonBase className={brucss.image} onClick={enviar}>
-					<img className={brucss.img} alt='And' src={and} name='AND' />
+					<img className={brucss.img} alt="And" src={and} name="AND" />
 				</ButtonBase>
 				<ButtonBase className={brucss.image} onClick={enviar}>
-					<img className={brucss.img} alt='Xor' src={xor} name='XOR' />
+					<img className={brucss.img} alt="Xor" src={xor} name="XOR" />
 				</ButtonBase>
 				<ButtonBase className={brucss.image} onClick={enviar}>
-					<img className={brucss.img} alt='Suma' src={or} name='or' />
+					<img className={brucss.img} alt="Suma" src={or} name="or" />
 				</ButtonBase>
 			</Grid>
 		</div>

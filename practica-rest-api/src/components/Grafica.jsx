@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	AppBar,
 	Button,
@@ -20,7 +20,20 @@ const Grafica = () => {
 	let { op } = useParams();
 	const history = useHistory();
 	const brucss = quedelol();
-
+	const [costo, setCosto] = useState([]);
+	const [iteraciones, setIteraciones] = useState([]);
+	useEffect(() => {
+		axios
+			.get(`http://localhost:5000/${op}`, {})
+			.then((res) => {
+				console.log(res.data);
+				setCosto(res.data.costs);
+				setIteraciones(res.data.iterations);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
 	const [predecir, setPredecir] = useState({ tipo: op, input: 0 });
 	const [prediccion, setPrediccion] = useState("0");
 	const handlePrediccion = () => {
@@ -39,49 +52,51 @@ const Grafica = () => {
 		<Grid>
 			<AppBar>
 				<Toolbar>
-					<Typography variant='h6' noWrap style={{ flexGrow: 1 }}>
+					<Typography variant="h6" noWrap style={{ flexGrow: 1 }}>
 						Red Neuronal - {op}
 					</Typography>
 					<Button onClick={() => history.push("/")}>Volver</Button>
 				</Toolbar>
 			</AppBar>
 			<Grid className={brucss.grafico}>
-				<Typography variant='h6' className={brucss.titulo}>
+				<Typography variant="h6" className={brucss.titulo}>
 					Entrenamiento - {op}
 				</Typography>
-				<Chart />
+				<Chart costos={costo} iteraciones={iteraciones} />
 			</Grid>
 			<Grid className={brucss.numeros}>
 				<TextField
-					id='outlined-number'
-					label='Input Data'
-					type='text'
+					id="outlined-number"
+					label="Input Data"
+					type="text"
 					InputLabelProps={{
 						shrink: true,
 					}}
-					variant='outlined'
+					variant="outlined"
 					value={predecir.input}
-					onChange={(e) => setPredecir({ ...predecir, input: e.target.value })}
+					onChange={(e) =>
+						setPredecir({ ...predecir, input: e.target.value })
+					}
 				/>
 				<DragHandleIcon
 					style={{ color: indigo[300], marginTop: "10px" }}
-					fontSize='large'
+					fontSize="large"
 				/>
 				<TextField
 					disabled
-					id='outlined-number'
-					label='Predicción'
-					type='text'
+					id="outlined-number"
+					label="Predicción"
+					type="text"
 					InputLabelProps={{
 						shrink: true,
 					}}
-					variant='outlined'
+					variant="outlined"
 					value={prediccion}
 				/>
 			</Grid>
 			<Grid style={{ textAlign: "center" }}>
 				<IconButton style={{}} onClick={handlePrediccion}>
-					<PlayArrowIcon style={{ color: indigo[300] }} fontSize='large' />
+					<PlayArrowIcon style={{ color: indigo[300] }} fontSize="large" />
 				</IconButton>
 			</Grid>
 		</Grid>
