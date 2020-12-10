@@ -5,6 +5,7 @@ import Grafica from "./components/Grafica";
 
 function App() {
 	return (
+		// Navegacion entre vistas
 		<Router>
 			<Route exact path='/'>
 				<Seleccion />

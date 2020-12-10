@@ -251,7 +251,7 @@ def train(red):
         full_parameters, its, costs=nn_model(x, y, 3, 15001, 0.05, True)
         return full_parameters, its, costs
 
-def main(red, bol, parameters):
+def main(red, bol, parameters, entrada):
     if bol:
         full_parameters, its, costs = train(red)
         return full_parameters, its, costs
