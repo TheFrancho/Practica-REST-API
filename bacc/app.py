@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import red_capa_oculta as capa
 
-full_parameters = [0] #Parametros de la red neuronal entrenada
+full_parameters = [0] #Parametros de la red neuronal entrenada (se almacena como arreglo para su manejo global)
 
 app = Flask(__name__) #Servidor con flask
 app.config['SECRET_KEY'] = 'secret!' 
@@ -22,14 +22,19 @@ def redneuronal(red_neuronal):
     #print(response)
     return response
 
+#Metodo POST para predecir los datos recibidos desde el front
 @app.route('/predecir', methods=['POST'])
 def predecir():
-    i = request.json["input"]
+    i = request.json["input"] #JSON recibido del front (data input)
+
+    #Convertir los datos del JSON recibido de "string" a "float"
     for j in range(0,len(i)):
         i[j] = float(i[j])
+    
+    #Llamar el programa de red neuronal para la predicción
+    #con el entrenamiento realizado anteriormente
     prediction = capa.main(None,0,full_parameters[0],i)
     prediction = str(prediction)
-    print(i)
     return prediction
     
 if __name__ == '__main__':
