@@ -9,7 +9,6 @@ import and from "./images/and.png";
 import xor from "./images/xor.png";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import Chart from "./Chart";
 
 function Seleccion() {
 	const history = useHistory();
@@ -38,7 +37,7 @@ function Seleccion() {
 					<Typography variant='h6'>Práctica REST-API - Red Neuronal</Typography>
 				</Toolbar>
 			</AppBar>
-			<Grid>
+			<Grid className={brucss.grupoBotones}>
 				<ButtonBase className={brucss.image} onClick={enviar}>
 					<img className={brucss.img} alt='Or' src={or} name='OR' />
 				</ButtonBase>
@@ -59,6 +58,13 @@ function Seleccion() {
 const quedelol = makeStyles((theme) => ({
 	principal: {
 		backgroundColor: theme.palette.secondary,
+	},
+	grupoBotones: {
+		textAlign: "center",
+		marginTop: "50px",
+	},
+	image: {
+		margin: "30px",
 	},
 }));
 
