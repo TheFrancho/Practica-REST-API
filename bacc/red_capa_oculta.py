@@ -256,6 +256,8 @@ def main(red, bol, parameters, entrada):
         full_parameters, its, costs = train(red)
         return full_parameters, its, costs
     else:
+        entrada = np.asarray([entrada])
+        entrada = entrada.T
         prediction = predict(parameters,entrada)
         return prediction
     

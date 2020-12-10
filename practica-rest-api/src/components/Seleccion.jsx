@@ -7,6 +7,7 @@ import { ButtonBase, Grid, Paper } from "@material-ui/core";
 import or from "./images/or.png";
 import and from "./images/and.png";
 import xor from "./images/xor.png";
+import suma from "./images/suma.png";
 import { useHistory } from "react-router-dom";
 
 function Seleccion() {
@@ -27,9 +28,11 @@ function Seleccion() {
 	return (
 		<div className={brucss.principal}>
 			{/* Barra superior donde esta el titulo de la pagina */}
-			<AppBar position='static'>
+			<AppBar position="static">
 				<Toolbar>
-					<Typography variant='h6'>Práctica REST-API - Red Neuronal</Typography>
+					<Typography variant="h6">
+						Práctica REST-API - Red Neuronal
+					</Typography>
 				</Toolbar>
 			</AppBar>
 
@@ -37,22 +40,22 @@ function Seleccion() {
 			<Grid className={brucss.grupoBotones}>
 				{/* Red Neuronal para OR */}
 				<ButtonBase className={brucss.image} onClick={enviar}>
-					<img className={brucss.img} alt='Or' src={or} name='OR' />
+					<img className={brucss.img} alt="Or" src={or} name="OR" />
 				</ButtonBase>
 
 				{/* Red Neuronal para AND */}
 				<ButtonBase className={brucss.image} onClick={enviar}>
-					<img className={brucss.img} alt='And' src={and} name='AND' />
+					<img className={brucss.img} alt="And" src={and} name="AND" />
 				</ButtonBase>
 
 				{/* Red Neuronal para XOR */}
 				<ButtonBase className={brucss.image} onClick={enviar}>
-					<img className={brucss.img} alt='Xor' src={xor} name='XOR' />
+					<img className={brucss.img} alt="Xor" src={xor} name="XOR" />
 				</ButtonBase>
 
 				{/* Red Neuronal para la suma de numeros */}
 				<ButtonBase className={brucss.image} onClick={enviar}>
-					<img className={brucss.img} alt='Suma' src={or} name='or' />
+					<img className={brucss.img} alt="Suma" src={suma} name="SUMA" />
 				</ButtonBase>
 			</Grid>
 		</div>
