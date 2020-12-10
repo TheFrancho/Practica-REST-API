@@ -48,6 +48,7 @@ const Grafica = () => {
 			.get(`http://localhost:5000/${op}`, {})
 			.then((res) => {
 				console.log(res.data);
+				handleClose();
 				//Asignar la respuesta del servidor a las variables correspondientes
 				setCosto(res.data.costs);
 				setIteraciones(res.data.iterations);
@@ -85,18 +86,18 @@ const Grafica = () => {
 			{/* Barra superior */}
 			<AppBar>
 				<Toolbar>
-					<Typography variant='h6' noWrap style={{ flexGrow: 1 }}>
+					<Typography variant="h6" noWrap style={{ flexGrow: 1 }}>
 						Red Neuronal - {op}
 					</Typography>
 					<Button onClick={() => history.push("/")}>Volver</Button>
 				</Toolbar>
 			</AppBar>
-			<Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
-				<CircularProgress color='inherit' />
+			<Backdrop className={brucss.backdrop} open={open}>
+				<CircularProgress color="inherit" />
 			</Backdrop>
 			{/* Grafico */}
 			<Grid className={brucss.grafico}>
-				<Typography variant='h6' className={brucss.titulo}>
+				<Typography variant="h6" className={brucss.titulo}>
 					Entrenamiento - {op}
 				</Typography>
 				<Chart costos={costo} iteraciones={iteraciones} />
@@ -106,38 +107,40 @@ const Grafica = () => {
 			<Grid className={brucss.numeros}>
 				{/* Input Data para la prediccion */}
 				<TextField
-					id='outlined-number'
-					label='Input Data'
-					type='text'
+					id="outlined-number"
+					label="Input Data"
+					type="text"
 					InputLabelProps={{
 						shrink: true,
 					}}
-					variant='outlined'
+					variant="outlined"
 					value={predecir.input}
-					onChange={(e) => setPredecir({ ...predecir, input: e.target.value })}
+					onChange={(e) =>
+						setPredecir({ ...predecir, input: e.target.value })
+					}
 				/>
 				{/* Icono "igual" */}
 				<DragHandleIcon
 					style={{ color: indigo[300], marginTop: "10px" }}
-					fontSize='large'
+					fontSize="large"
 				/>
 				{/* Output de la prediccion */}
 				<TextField
 					disabled
-					id='outlined-number'
-					label='Predicción'
-					type='text'
+					id="outlined-number"
+					label="Predicción"
+					type="text"
 					InputLabelProps={{
 						shrink: true,
 					}}
-					variant='outlined'
+					variant="outlined"
 					value={prediccion}
 				/>
 			</Grid>
 			{/* Boton para enviar la solicitud para predecir */}
 			<Grid style={{ textAlign: "center" }}>
 				<IconButton style={{}} onClick={handlePrediccion}>
-					<PlayArrowIcon style={{ color: indigo[300] }} fontSize='large' />
+					<PlayArrowIcon style={{ color: indigo[300] }} fontSize="large" />
 				</IconButton>
 			</Grid>
 		</Grid>
