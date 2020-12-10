@@ -1,0 +1,65 @@
+import React, { useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import { ButtonBase, Grid, Paper } from "@material-ui/core";
+import or from "./images/or.png";
+import and from "./images/and.png";
+import xor from "./images/xor.png";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import Chart from "./Chart";
+
+function Seleccion() {
+	const history = useHistory();
+
+	const enviar = (e) => {
+		axios
+			.get(`http://localhost:5000/${e.target.name}`, {})
+			.then((res) => {
+				console.log(res.data);
+				history.push(`/grafica/${e.target.name}`);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+		//history.push(`/${e.target.name}`);
+		console.log(e.target.name);
+	};
+
+	const brucss = quedelol();
+
+	useEffect(() => {}, []);
+	return (
+		<div className={brucss.principal}>
+			<AppBar position='static'>
+				<Toolbar>
+					<Typography variant='h6'>Práctica REST-API - Red Neuronal</Typography>
+				</Toolbar>
+			</AppBar>
+			<Grid>
+				<ButtonBase className={brucss.image} onClick={enviar}>
+					<img className={brucss.img} alt='Or' src={or} name='OR' />
+				</ButtonBase>
+				<ButtonBase className={brucss.image} onClick={enviar}>
+					<img className={brucss.img} alt='And' src={and} name='AND' />
+				</ButtonBase>
+				<ButtonBase className={brucss.image} onClick={enviar}>
+					<img className={brucss.img} alt='Xor' src={xor} name='XOR' />
+				</ButtonBase>
+				<ButtonBase className={brucss.image} onClick={enviar}>
+					<img className={brucss.img} alt='Suma' src={or} name='or' />
+				</ButtonBase>
+			</Grid>
+		</div>
+	);
+}
+
+const quedelol = makeStyles((theme) => ({
+	principal: {
+		backgroundColor: theme.palette.secondary,
+	},
+}));
+
+export default Seleccion;
